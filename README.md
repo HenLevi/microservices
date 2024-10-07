@@ -4,11 +4,11 @@ Spring Boot Microservices with Minikube, Kubernetes and Docker
 # Overview
 This project presents a production-ready microservices application built with Spring Boot and deployed on a local Kubernetes cluster using Minikube. The application consists of two services:
 
-  # Service A: Fetches the Bitcoin price in USD from an external API every minute and calculates the average of bitcoin price every 10 
-              minutes.
+  # Service A:
+  Fetches the Bitcoin price in USD from an external API every minute and calculates the average of bitcoin price every 10 minutes.
+  
   # Service B: Print "Hello Microsoft!".
-   
-The services are deployed with the following requirements:
+  The services are deployed with the following requirements:
 
 # Prerequisites
 Ensure you have the following installed:
@@ -20,6 +20,7 @@ Postman.
 I worked with Java 22 and Maven for building the Spring Boot MicroServices.
 
 # step:
+
 
 Open Your Terminal: 
 Step 1: Start Minikube with RBAC enabled
