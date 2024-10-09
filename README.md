@@ -22,9 +22,7 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    Start the Minikube cluster with RBAC enabled:
 
 ```bash
-# Command line frame starts
 minikube start --extra-config=apiserver.authorization-mode=RBAC
-# Command line frame ends
 ```
 
 
