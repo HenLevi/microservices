@@ -21,7 +21,7 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
   Minikube
 
 
-## Cluster Setup (command thats help some of then with my root directory-you can change according your path)
+## Cluster Setup (some of then with my root directory)
   * the command with my path but you can change accordingly
 1. **Install Minikube**  
 2. **Start Minikube**  
