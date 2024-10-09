@@ -1,5 +1,5 @@
 # Overview
-This project demonstrates setting up two microservices using Spring Boot, Docker, and Kubernetes on a local Minikube cluster. It includes Service A (retrieving Bitcoin prices) and Service B (printing a message), managed via an Ingress controller and secured with RBAC and network policies.
+This project demonstrates setting up two microservices using Spring Boot, Docker, and Kubernetes on a local Minikube cluster. It includes Service A and Service B, managed via an Ingress controller and secured with RBAC and network policies.
 
 ### Project Overview
 - **Service A**: Retrieves Bitcoin prices in USD from a web API every minute and prints it. Every 10 minutes, it calculates and prints the average price.
@@ -7,17 +7,14 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
 - **Ingress Controller**: Routes traffic to `/service-A` and `/service-B` respectively.
 - **RBAC**: Role-based access control is enabled for secure communication.
 - **Network Policy**: Service A cannot communicate with Service B.
-- **Liveness & Readiness Probes**: Ensures pod health and readiness for both services.
 
 - ### Services
-- **Service A**: Runs on port 8083. Endpoint: /api/fetch-btc
-- **Service B**: Runs on port 8084. Endpoint: /api/msg
+- **Service A**: Runs on port 8083. Endpoint: http://localhost:8083/api/fetch-btc
+- **Service B**: Runs on port 8084. Endpoint: http://localhost:8084/api/msg
 
 ## Cluster Setup
 
 1. **Install Minikube**  
-   Follow the instructions from the official [Minikube documentation](https://minikube.sigs.k8s.io/docs/start/) to install and set it up locally.
-
 2. **Start Minikube**  
    Start the Minikube cluster with RBAC enabled:
 
@@ -41,28 +38,26 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    kubectl apply -f k8s/network-policy.yaml
    ```
 
-  Verify Ingress After deploying the Ingress, you can access the services by opening a browser and navigating to:
+   Verify Ingress After deploying the Ingress, you can access the services by opening a browser and navigating to:
   ```bash
   minikube ip
   http://<minikube-ip>/service-A for Service A   
   http://<minikube-ip>/service-B for Service B
   ```
 
+  Build & Deployment
+  Build Docker Images Navigate to each service directory and build Docker images:
+  ```bash
+  cd service-a
+  mvn clean package
+  docker build -t service-a:latest .
+  ```
 
-Build & Deployment
-Build Docker Images Navigate to each service directory and build Docker images:
-```bash
-cd service-a
-mvn clean package
-docker build -t service-a:latest .
-```
-
-
-```bash
-cd ../service-b
-mvn clean package
-docker build -t service-b:latest .
-```
+  ```bash
+  cd ../service-b
+  mvn clean package
+  docker build -t service-b:latest .
+  ```
 
 Push Images to Minikube Use Minikube’s Docker environment to build and push images:
 
@@ -73,8 +68,8 @@ docker build -t service-b:latest service-b/
 ```
 Deploy to Kubernetes Apply the Kubernetes manifests in the k8s/ folder to deploy the services and configure Ingress:
 
- ```bash
-kubectl apply -f k8s/
+```bash
+    kubectl apply -f k8s/
 ```
 
 
