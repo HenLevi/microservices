@@ -22,7 +22,7 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
 
 
 ## Cluster Setup
-
+  * the command with my path but you can change accordingly
 1. **Install Minikube**  
 2. **Start Minikube**  
    Start the Minikube cluster with RBAC enabled:
