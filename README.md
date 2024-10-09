@@ -27,7 +27,7 @@ This project demonstrates a simple microservices spring boot architecture deploy
 
    Deploy Services and Ingress Controller The Kubernetes manifests are included in the k8s directory. To apply them, use the following commands:
 
- ```bash
+
 kubectl apply -f k8s/namespace.yaml
 kubectl apply -f k8s/service-a.yaml
 kubectl apply -f k8s/service-b.yaml
@@ -35,37 +35,37 @@ kubectl apply -f k8s/ingress-controller.yaml
 kubectl apply -f k8s/network-policy.yaml
 
 Verify Ingress After deploying the Ingress, you can access the services by opening a browser and navigating to:
- ```bash
+
 http://<minikube-ip>/service-A for Service A
 http://<minikube-ip>/service-B for Service B
 
 To find your Minikube IP, run:
 
- ```bash
+
 minikube ip
 
 Build & Deployment
 Build Docker Images Navigate to each service directory and build Docker images:
- ```bash
+
 cd service-a
 mvn clean package
 docker build -t service-a:latest .
 
- ```bash
+
 cd ../service-b
 mvn clean package
 docker build -t service-b:latest .
 
 Push Images to Minikube Use Minikube’s Docker environment to build and push images:
 
- ```bash
+ 
 eval $(minikube docker-env)
 docker build -t service-a:latest service-a/
 docker build -t service-b:latest service-b/
 
 Deploy to Kubernetes Apply the Kubernetes manifests in the k8s/ folder to deploy the services and configure Ingress:
 
- ```bash
+
 kubectl apply -f k8s/
 
 
@@ -73,21 +73,21 @@ kubectl apply -f k8s/
 Check Services
 Verify that the services are running correctly:
 
- ```bash
+
 kubectl get pods
 kubectl get services
 
 Access Services via Ingress
 Open your browser and test:
 
- ```bash
+
 Service A: http://<minikube-ip>/service-A
 Service B: http://<minikube-ip>/service-B
 
 Logs
 To view logs for Service A (Bitcoin retrieval):
 
- ```bash
+
 kubectl logs <service-a-pod-name>
 
 
