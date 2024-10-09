@@ -20,7 +20,7 @@ This project demonstrates a simple microservices spring boot architecture deploy
 
 2. **Start Minikube**  
    Start the Minikube cluster with RBAC enabled:
-   ```bash
+  
    minikube start --extra-config=apiserver.authorization-mode=RBAC
 
   
