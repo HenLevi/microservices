@@ -23,6 +23,8 @@ This project demonstrates a simple microservices spring boot architecture deploy
    ```bash
    minikube start --extra-config=apiserver.authorization-mode=RBAC
 
+  
+
    Deploy Services and Ingress Controller The Kubernetes manifests are included in the k8s directory. To apply them, use the following commands:
 
 
