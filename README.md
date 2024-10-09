@@ -22,12 +22,11 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    Start the Minikube cluster with RBAC enabled:
 
 ```bash
-  minikube start --extra-config=apiserver.authorization-mode=RBAC
+   minikube start --extra-config=apiserver.authorization-mode=RBAC
 ```
-You can verify RBAC enable with command below (you see --authorization-mode=Node,RBAC):
+   You can verify RBAC enable with command below (you see result --authorization-mode=Node,RBAC):
 ```bash
-You can verify with run the command below
-kubectl get pod -n kube-system -l component=kube-apiserver -o yaml | Select-String authorization-mode
+   kubectl get pod -n kube-system -l component=kube-apiserver -o yaml | Select-String authorization-mode
 ```
 
 
