@@ -90,20 +90,3 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
   Service A: http://<minikube-ip>/service-A
   Service B: http://<minikube-ip>/service-B
   ```
-
-  Logs
-  To view logs for Service A (Bitcoin retrieval):
-
-  ```bash
-  kubectl logs <service-a-pod-name>
-  ```
-
-
-
-
-
-
-
-  
-
-
