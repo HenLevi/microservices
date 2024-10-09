@@ -21,7 +21,7 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
   Minikube
 
 
-## Cluster Setup
+## Cluster Setup (command thats help some of then with my root directory-you can change according your path)
   * the command with my path but you can change accordingly
 1. **Install Minikube**  
 2. **Start Minikube**  
@@ -66,8 +66,8 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    Check ip and verify Ingress:
   ```bash
   minikube ip
-  http://<minikube-ip>/service-A for Service A   
-  http://<minikube-ip>/service-B for Service B
+  http://<minikube-ip>/service-A    
+  http://<minikube-ip>/service-B 
   ```
 
 
