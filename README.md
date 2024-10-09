@@ -66,9 +66,10 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    Check ip and verify Ingress:
   ```bash
   minikube ip
-  ```
   http://<minikube-ip>/service-A for Service A   
   http://<minikube-ip>/service-B for Service B
+  ```
+
 
   
   Deploy to Kubernetes Apply the Kubernetes manifests in the k8s/ folder to deploy the services and configure Ingress:
