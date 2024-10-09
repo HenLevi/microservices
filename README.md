@@ -1,5 +1,5 @@
 # Overview
-This project demonstrates a simple microservices spring boot architecture deployed on Kubernetes using Minikube for local development.
+This project demonstrates setting up two microservices using Spring Boot, Docker, and Kubernetes on a local Minikube cluster. It includes Service A (retrieving Bitcoin prices) and Service B (printing a message), managed via an Ingress controller and secured with RBAC and network policies.
 
 ### Project Overview
 - **Service A**: Retrieves Bitcoin prices in USD from a web API every minute and prints it. Every 10 minutes, it calculates and prints the average price.
