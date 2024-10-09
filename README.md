@@ -30,26 +30,25 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    ```
    
    Deploy Services and Ingress Controller The Kubernetes manifests are included in the k8s directory. To apply them, use the following commands:
-
+   
    ```bash
-   kubectl apply -f k8s/namespace.yaml
+   kubectl apply -f k8s/rbac.yaml
    kubectl apply -f k8s/service-a.yaml
    kubectl apply -f k8s/service-b.yaml
-   kubectl apply -f k8s/ingress-controller.yaml
+   kubectl apply -f k8s/service-a-deployment.yaml
+   kubectl apply -f k8s/service-b-deployment.yaml
+   kubectl apply -f k8s/ingress.yaml
    kubectl apply -f k8s/network-policy.yaml
    ```
 
-Verify Ingress After deploying the Ingress, you can access the services by opening a browser and navigating to:
-```bash
-http://<minikube-ip>/service-A for Service A
-http://<minikube-ip>/service-B for Service B
-```
+  Verify Ingress After deploying the Ingress, you can access the services by opening a browser and navigating to:
+  ```bash
+  minikube ip
+  http://<minikube-ip>/service-A for Service A   192.168.49.2
+  http://<minikube-ip>/service-B for Service B
+  ```
 
-To find your Minikube IP, run:
 
-```bash
-minikube ip
-```
 
 
 Build & Deployment
