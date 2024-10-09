@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-service-a-to-service-b
+spec:
+  podSelector:
+    matchLabels:
+      app: service-a  # Match the label of service-a pods
+  policyTypes:
+  - Ingress  # You may keep Ingress or egress depending on the rule
+  - Egress  # Indicates that this policy applies to outgoing traffic
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: service-b  # Match the label of service-b pods
+    ports:
+    - protocol: TCP
+      port: 8084  # Port on which service-b is running

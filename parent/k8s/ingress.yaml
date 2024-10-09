@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-ingress
+spec:
+  rules:
+    - host: my-cluster.local
+      http:
+        paths:
+          - path: /service-A
+            pathType: Prefix
+            backend:
+              service:
+                name: service-a
+                port:
+                  number: 8083
+          - path: /service-B
+            pathType: Prefix
+            backend:
+              service:
+                name: service-b
+                port:
+                  number: 8084
