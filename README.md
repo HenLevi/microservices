@@ -3,14 +3,23 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
 
 ### Project Overview
 - **Service A**: Retrieves Bitcoin prices in USD from a web API every minute and prints it. Every 10 minutes, it calculates and prints the average price.
+                 Runs on port 8083. Endpoint: http://localhost:8083/api/fetch-btc
 - **Service B**: Responds with "Hello Microsoft!" when accessed.
+                 Runs on port 8084. Endpoint: http://localhost:8084/api/msg
 - **Ingress Controller**: Routes traffic to `/service-A` and `/service-B` respectively.
 - **RBAC**: Role-based access control is enabled for secure communication.
 - **Network Policy**: Service A cannot communicate with Service B.
 
-- ### Services
-- **Service A**: Runs on port 8083. Endpoint: http://localhost:8083/api/fetch-btc
-- **Service B**: Runs on port 8084. Endpoint: http://localhost:8084/api/msg
+
+
+- ### Technologies Used
+  Java 22
+  Spring Boot microservices
+  Maven
+  Docker
+  Kubernetes
+  Minikube
+
 
 ## Cluster Setup
 
@@ -25,8 +34,24 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    ```bash
    kubectl get pod -n kube-system -l component=kube-apiserver -o yaml | Select-String authorization-mode
    ```
-   
-   Deploy all files in the k8s directory. To apply them, use the following commands:
+
+   Build & Deployment: Build Docker Images Navigate to each service directory and build Docker images:
+   ```bash
+   cd service-a
+   mvn clean package
+   docker build -t henlevi/service-a-image:latest .
+   cd ../service-b
+   mvn clean package
+   docker build -t henlevi/service-b-image:latest .
+   ```
+
+  Push Images to Minikube Use Minikube’s Docker environment to build and push images:
+  ```bash
+  docker run -p 8083:8083 henlevi/service-a-image:latest
+  docker run -p 8084:8084 henlevi/service-b-image:latest
+  ```
+
+  Deploy all files in the k8s directory. To apply them, use the following commands:
    
    ```bash
    kubectl apply -f k8s/rbac.yaml
@@ -38,62 +63,39 @@ This project demonstrates setting up two microservices using Spring Boot, Docker
    kubectl apply -f k8s/network-policy.yaml
    ```
 
-   Verify Ingress After deploying the Ingress, you can access the services by opening a browser and navigating to:
+   Check ip and verify Ingress:
   ```bash
   minikube ip
+  ```
   http://<minikube-ip>/service-A for Service A   
   http://<minikube-ip>/service-B for Service B
-  ```
 
-  Build & Deployment
-  Build Docker Images Navigate to each service directory and build Docker images:
-  ```bash
-  cd service-a
-  mvn clean package
-  docker build -t service-a:latest .
-  ```
+  
+  Deploy to Kubernetes Apply the Kubernetes manifests in the k8s/ folder to deploy the services and configure Ingress:
 
   ```bash
-  cd ../service-b
-  mvn clean package
-  docker build -t service-b:latest .
-  ```
-
-Push Images to Minikube Use Minikube’s Docker environment to build and push images:
-
- ```bash
-eval $(minikube docker-env)
-docker build -t service-a:latest service-a/
-docker build -t service-b:latest service-b/
-```
-Deploy to Kubernetes Apply the Kubernetes manifests in the k8s/ folder to deploy the services and configure Ingress:
-
-```bash
     kubectl apply -f k8s/
-```
+  ```
 
+  Check Services-Verify that the services are running correctly:
+  ```bash
+  kubectl get pods
+  kubectl get services
+  ```
 
-Check Services
-Verify that the services are running correctly:
+  Access Services via Ingress
+  Open your browser and test:
+  ```bash
+  Service A: http://<minikube-ip>/service-A
+  Service B: http://<minikube-ip>/service-B
+  ```
 
-```bash
-kubectl get pods
-kubectl get services
-```
+  Logs
+  To view logs for Service A (Bitcoin retrieval):
 
-Access Services via Ingress
-Open your browser and test:
-
-```bash
-Service A: http://<minikube-ip>/service-A
-Service B: http://<minikube-ip>/service-B
-```
-Logs
-To view logs for Service A (Bitcoin retrieval):
-
-```bash
-kubectl logs <service-a-pod-name>
-```
+  ```bash
+  kubectl logs <service-a-pod-name>
+  ```
 
 
 
